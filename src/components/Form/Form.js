@@ -2,7 +2,7 @@ import { Button, FormContact, Input, Label } from "./Form.styled"
 
 
 export const Form = ({state}) =>{
-    const {name} = state
+    // const {name} = state
     return(
         <FormContact>
             <Label htmlFor="111">
