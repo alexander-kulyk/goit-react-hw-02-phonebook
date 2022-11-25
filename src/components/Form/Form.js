@@ -1,22 +1,28 @@
-import { Button, FormContact, Input, Label } from "./Form.styled"
+import { nanoid } from 'nanoid';
+import { Button, FormContact, Input, Label } from "./Form.styled";
 
 
-export const Form = ({state}) =>{
-    // const {name} = state
+const idInput = nanoid();
+
+export const Form = ({state, handelChangeInput, hanleSubmit}) =>{
+    const {name} = state
     return(
         <FormContact>
-            <Label htmlFor="111">
+            <Label htmlFor={idInput}>
               Name  
             </Label>
             <Input
-                // value={name}
+                value={name}
                 type="text"
                 name="name"
                 pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
                 title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                 required
-                id="111"/>
-                <Button type="submit">Add</Button>
+                id={idInput}
+                
+                onChange={handelChangeInput}
+                />
+                <Button onClick={hanleSubmit} type="submit">Add</Button>
         </FormContact> 
     );
 }
