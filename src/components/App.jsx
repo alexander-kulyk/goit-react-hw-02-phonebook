@@ -9,15 +9,15 @@ import { nanoid } from 'nanoid'
 
 
 
-
-
-export class App extends Component  {
+export class App extends Component {
   state = {
     contacts: [],
-    name: ''
+    name: '',
+    number: ''
   }
 
   handelChangeInput = e =>{
+    
     const {value, name } = e.target;
     this.setState({[name]: value });
   }
@@ -26,19 +26,26 @@ export class App extends Component  {
     e.preventDefault()
     const id = nanoid()
 
-    const {name, contacts} = this.state
-    contacts.push({nameUser: name, idUser: id});
+    const {name, number, contacts} = this.state
+    
+    contacts.push({
+      nameUser: name, 
+      idUser: id, 
+      numberUser: number
+    });
+
     this.rest()
   }
 
   rest = () =>{
-    this.setState({name:''})
+    this.setState({name:'', number:''})
   }
 
 
   render(){
     return (
       <Container>
+
         <Section title='Phonebook'>
           <Form 
             state = {this.state} 
@@ -48,11 +55,10 @@ export class App extends Component  {
         </Section>
         <Section title='Contact'>
           <Contact state = {this.state}/>
-        </Section>
-        
+        </Section>  
+
       </Container>
     );
-
 
   }
 

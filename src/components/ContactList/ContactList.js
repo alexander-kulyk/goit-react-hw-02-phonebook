@@ -5,11 +5,14 @@ import { ContactList, ItemsContact } from "./ContactList.styled"
 
 export const Contact = ({state}) =>{
     const {contacts} = state
-    console.log(contacts);
     return(
         <ContactList>
-            {contacts.map(({idUser, nameUser}) =>(
-                <ItemsContact key={idUser}>{nameUser}</ItemsContact>
+            {contacts.map(({
+                idUser, 
+                nameUser,
+                numberUser
+            }) =>(
+                <ItemsContact key={idUser}>{nameUser}: {numberUser} </ItemsContact>
             ))}  
         </ContactList>
     )
