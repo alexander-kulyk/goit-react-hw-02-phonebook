@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+
 import { Formik, Form, Field } from 'formik'
 import { nanoid } from 'nanoid';
-import { Button, FormContact, Input, Label } from "./Form.styled";
+import { Button, Label } from "./Form.styled";
 
 
 const idInputName = nanoid();
