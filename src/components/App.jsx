@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { nanoid } from 'nanoid';
 import { Contact } from "./ContactList/ContactList";
 import Container from "./Container/Conteiner.styled";
-import { Form } from "./Form/Form";
+import { ContactForm } from "./Form/Form";
 import { Section } from "./Section/Section";
 import { Filter } from "./Filter/Filter";
 
@@ -20,13 +20,27 @@ export class App extends Component {
     filter:''
   }
 
+  handleSubmit = (values, {resetForm}) =>{
+      const {name, number} = values;
+      this.addNewCotact(name, number)
+      resetForm()
+  }
+
   addNewCotact = (name, number) =>{
-    
+    const {contacts} = this.state
+    const checkContact = contacts.map(({name}) => 
+       name.toLocaleLowerCase().includes(name.toLocaleLowerCase()));
+
+       console.log(checkContact);
     const newContact = {
       id: nanoid(),
       name,
       number
     }
+
+    // if (contacts) {
+      
+    // }
     this.setState(pS =>({
       contacts: [newContact, ...pS.contacts]
     }))
@@ -52,10 +66,10 @@ export class App extends Component {
       <Container>
 
         <Section title='Phonebook'>
-          <Form 
+          <ContactForm 
             state = {this.state} 
             handelChangeInput={this.handelChangeInput}
-            hanleSubmit = {this.hanleSubmit}
+            handleSubmit = {this.handleSubmit}
             addNewCotact = {this.addNewCotact}
             />
         </Section>
