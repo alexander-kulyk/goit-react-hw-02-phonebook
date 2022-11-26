@@ -9,3 +9,6 @@ export const ItemsContact = styled.li`
   
 `;
 
+export const DeleteBtn = styled.button`
+  
+`;

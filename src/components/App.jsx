@@ -31,8 +31,7 @@ export class App extends Component {
 
     // const checkContact = contacts.some(item => item.name === name);
     const checkContact = contacts.find(item => item.name === name);
-
-       console.log(checkContact);
+    
     const newContact = {
       id: nanoid(),
       name,
@@ -48,6 +47,12 @@ export class App extends Component {
   
     }
     
+  }
+
+  deleteContact = contactId =>{
+    this.setState(pS =>({
+      contacts: pS.contacts.filter(({id}) => id !== contactId)
+    }))
   }
 
   handleFindContact = e =>{
@@ -85,6 +90,7 @@ export class App extends Component {
             />
           <Contact 
             visibleContact = {visibleContact}
+            deleteContact = {this.deleteContact}
             />
         </Section>  
 
