@@ -1,11 +1,11 @@
 
 import React, { Component } from "react";
+import { nanoid } from 'nanoid';
 import { Contact } from "./ContactList/ContactList";
 import Container from "./Container/Conteiner.styled";
 import { Form } from "./Form/Form";
 import { Section } from "./Section/Section";
-
-import { nanoid } from 'nanoid'
+import { Filter } from "./Filter/Filter";
 
 
 
@@ -17,45 +17,37 @@ export class App extends Component {
       {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
       {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
     ],
-    name:'',
-    number:'',
     filter:''
   }
 
-  handelChangeInput = e =>{
-
-    const {value, name } = e.target;
-    this.setState({[name]: value });
-  }
-
-  hanleSubmit = e =>{
-    e.preventDefault()
-    const id = nanoid()
-
-    const {name, number, contacts} = this.state
+  addNewCotact = (name, number) =>{
     
-    contacts.push({
-      name, 
-      id, 
-      number,
-    });
+    const newContact = {
+      id: nanoid(),
+      name,
+      number
+    }
+    this.setState(pS =>({
+      contacts: [newContact, ...pS.contacts]
+    }))
 
-    this.rest()
   }
 
   handleFindContact = e =>{
-      const {value, name} = e.target
-      this.setState({
-        [name]:value
-      })
+    this.setState({filter: e.target.value})
   }
 
-  rest = () =>{
-    this.setState({name:'', number:''})
+  getVisibleContact = () =>{
+    const {contacts, filter} = this.state;
+
+    return contacts.filter(({name})=>
+       name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
+    )
   }
 
 
   render(){
+    const visibleContact = this.getVisibleContact()
     return (
       <Container>
 
@@ -64,12 +56,17 @@ export class App extends Component {
             state = {this.state} 
             handelChangeInput={this.handelChangeInput}
             hanleSubmit = {this.hanleSubmit}
+            addNewCotact = {this.addNewCotact}
             />
         </Section>
         <Section title='Contact'>
-          <Contact 
+          <Filter 
+            title="Find contacs by name"
             state = {this.state}
             handleFindContact = {this.handleFindContact}
+            />
+          <Contact 
+            visibleContact = {visibleContact}
             />
         </Section>  
 
