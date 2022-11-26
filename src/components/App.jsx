@@ -21,15 +21,16 @@ export class App extends Component {
   }
 
   handleSubmit = (values, {resetForm}) =>{
-      const {name, number} = values;
-      this.addNewCotact(name, number)
+      this.addNewCotact(values)
       resetForm()
   }
 
-  addNewCotact = (name, number) =>{
+  addNewCotact = values =>{
+    const {name, number} = values;
     const {contacts} = this.state
-    const checkContact = contacts.map(({name}) => 
-       name.toLocaleLowerCase().includes(name.toLocaleLowerCase()));
+
+    // const checkContact = contacts.some(item => item.name === name);
+    const checkContact = contacts.find(item => item.name === name);
 
        console.log(checkContact);
     const newContact = {
@@ -38,13 +39,15 @@ export class App extends Component {
       number
     }
 
-    // if (contacts) {
-      
-    // }
-    this.setState(pS =>({
-      contacts: [newContact, ...pS.contacts]
-    }))
-
+    if (checkContact !== undefined) {
+      alert(`${name} is already in contacts.`)
+    }else{
+      this.setState(pS =>({
+        contacts: [newContact, ...pS.contacts]
+      }))
+  
+    }
+    
   }
 
   handleFindContact = e =>{
@@ -53,9 +56,10 @@ export class App extends Component {
 
   getVisibleContact = () =>{
     const {contacts, filter} = this.state;
+    const normalizeFilter = filter.toLocaleLowerCase()
 
     return contacts.filter(({name})=>
-       name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
+       name.toLocaleLowerCase().includes(normalizeFilter)
     )
   }
 
