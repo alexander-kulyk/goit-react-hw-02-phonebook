@@ -70,7 +70,9 @@ export class App extends Component {
 
 
   render(){
-    const visibleContact = this.getVisibleContact()
+    const {contacts} = this.state;
+    const visibleContact = this.getVisibleContact();
+    
     return (
       <Container>
 
@@ -91,6 +93,8 @@ export class App extends Component {
           <Contact 
             visibleContact = {visibleContact}
             deleteContact = {this.deleteContact}
+            contacts = {contacts}
+
             />
         </Section>  
 

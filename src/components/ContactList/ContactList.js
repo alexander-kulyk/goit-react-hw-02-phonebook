@@ -1,16 +1,21 @@
-import { ContactList, ItemsContact,DeleteBtn } from "./ContactList.styled"
+import { ContactList, ItemsContact,DeleteBtn, Notification } from "./ContactList.styled"
 
 
-export const Contact = ({visibleContact, deleteContact}) =>{
-    
+export const Contact = ({visibleContact, deleteContact, contacts}) =>{
     return(
         <ContactList>
           
-             {visibleContact.map(({id, name, number}) =>(
-                <ItemsContact 
-                    key={id}>{name}: {number} <DeleteBtn type="button" onClick={()=>deleteContact(id)}>delete</DeleteBtn>
-                </ItemsContact>
-            ))}
+            { contacts.length === 0
+                ? <Notification>You have no contacts</Notification>
+                : visibleContact.length === 0
+                    ? <Notification>contact not found</Notification>
+                    : visibleContact.map(({id, name, number}) =>(
+                        <ItemsContact 
+                        key={id}>{name}: {number} <DeleteBtn type="button" onClick={()=>deleteContact(id)}>delete</DeleteBtn>
+                        </ItemsContact>
+             
+                    ))
+            }
             
         </ContactList>
     )
