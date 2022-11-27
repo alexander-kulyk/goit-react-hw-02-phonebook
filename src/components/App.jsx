@@ -1,11 +1,14 @@
 
 import React, { Component } from "react";
 import { nanoid } from 'nanoid';
+import { ThemeProvider } from 'styled-components';
+
+import { theme } from "../theme/theme";
 import { Contact } from "./ContactList/ContactList";
 import Container from "./Container/Conteiner.styled";
 import { ContactForm } from "./Form/Form";
 import { Filter } from "./Filter/Filter";
-import { Title } from "./Title/Title";
+import { PrimaryTitle, SecondaryTitle } from "./Titles/Titles";
 
 
 
@@ -74,31 +77,51 @@ export class App extends Component {
     const visibleContact = this.getVisibleContact();
 
     return (
-      <Container>
 
-        <Title PrTitle ="Phonebook"/>
-          <ContactForm 
-            state = {this.state} 
-            handelChangeInput={this.handelChangeInput}
-            handleSubmit = {this.handleSubmit}
-            addNewCotact = {this.addNewCotact}
-          />
-       
-        <Title SecondTitle='Contact'/>
-          <Filter 
-            title="Find contacs by name"
-            state = {this.state}
-            handleFindContact = {this.handleFindContact}
-            />
-          <Contact 
-            visibleContact = {visibleContact}
-            deleteContact = {this.deleteContact}
-            contacts = {contacts}
-          />
+          <ThemeProvider theme={theme}>
+            <Container>
 
-      </Container>
-    );
+              <Container
+                display="flex"
+                flexDirection='column'
+                justifyContent='center'
+                alignItems='center'
+                bg='#ededf0'
+                p={4}
+                boxShadow="0px 2px 10px -3px rgba(0,0,0,0.3)"
+                
+              >
+                <PrimaryTitle>Phonebook</PrimaryTitle>
+                  <ContactForm 
+                    state = {this.state} 
+                    handelChangeInput={this.handelChangeInput}
+                    handleSubmit = {this.handleSubmit}
+                    addNewCotact = {this.addNewCotact}
+                  />
+              </Container>
 
+              <Container
+                display="flex"
+                flexDirection='column'
+                justifyContent='center'
+                alignItems='center'
+              >
+                <SecondaryTitle>Contact</SecondaryTitle>
+                  <Filter 
+                    title="Find contacs by name"
+                    state = {this.state}
+                    handleFindContact = {this.handleFindContact}
+                    />
+                  <Contact 
+                    visibleContact = {visibleContact}
+                    deleteContact = {this.deleteContact}
+                    contacts = {contacts}
+                  />
+              </Container>
+
+            </Container>
+          </ThemeProvider>
+        );
   }
 
 }

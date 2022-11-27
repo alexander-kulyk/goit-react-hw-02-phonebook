@@ -1,7 +1,9 @@
+import PropTypes  from "prop-types"
 import { ContactList, ItemsContact,DeleteBtn, Notification } from "./ContactList.styled"
 
 
 export const Contact = ({visibleContact, deleteContact, contacts}) =>{
+    
     return(
         <ContactList>
           
@@ -19,4 +21,23 @@ export const Contact = ({visibleContact, deleteContact, contacts}) =>{
             
         </ContactList>
     )
+}
+
+
+Contact.propTypes = {
+    visibleContact: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired,
+            number: PropTypes.string.isRequired,
+        })),
+    deleteContact: PropTypes.func.isRequired,
+    contacts: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired,
+            number: PropTypes.string.isRequired,
+        }),
+    )
+    
 }

@@ -1,7 +1,8 @@
+import PropTypes from 'prop-types';
 
-import { Formik, Form, Field } from 'formik'
+import { Formik } from 'formik'
 import { nanoid } from 'nanoid';
-import { Button, Label } from "./Form.styled";
+import { Button, FormContact, Input, Label } from "./Form.styled";
 
 
 const idInputName = nanoid();
@@ -11,11 +12,12 @@ export const ContactForm = ({handleSubmit}) =>{
    
     return(
         <Formik initialValues={{ name:'', number:'' }} onSubmit={handleSubmit}>
-                <Form>
+               
+                <FormContact>
                     <Label htmlFor={idInputName}>
                     Name  
                     </Label>
-                    <Field
+                    <Input
                         type="text"
                         name="name"
                         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -28,7 +30,7 @@ export const ContactForm = ({handleSubmit}) =>{
                         <Label htmlFor={idInputNamber}>
                             Namber  
                         </Label>
-                        <Field
+                        <Input
                             type="tel"
                             name="number"
                             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -38,8 +40,12 @@ export const ContactForm = ({handleSubmit}) =>{
                             id={idInputNamber}
                             />
 
-                        <Button  type="submit">Add</Button>
-                </Form> 
+                        <Button  type="submit">Add Contact</Button>
+                </FormContact> 
         </Formik>
         )
+    }
+
+    ContactForm.propTypes = {
+        handleSubmit: PropTypes.func.isRequired,
     }
