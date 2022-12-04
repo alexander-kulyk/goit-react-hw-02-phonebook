@@ -24,11 +24,10 @@ export class App extends Component {
   }
 
   handleSubmit = (values, {resetForm}) =>{
-      this.addNewCotact(values)
-      resetForm()
+      this.addNewCotact(values,resetForm);
   }
 
-  addNewCotact = values =>{
+  addNewCotact = (values, resetForm) =>{
     const {name, number} = values;
     const {contacts} = this.state
 
@@ -42,12 +41,12 @@ export class App extends Component {
     }
 
     if (checkContact !== undefined) {
-      alert(`${name} is already in contacts.`)
+      alert(`${name} is already in contacts.`);
     }else{
       this.setState(pS =>({
         contacts: [newContact, ...pS.contacts]
       }))
-  
+      resetForm()
     }
     
   }
