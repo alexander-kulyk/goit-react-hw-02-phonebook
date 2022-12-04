@@ -9,6 +9,7 @@ import Container from "./Container/Conteiner.styled";
 import { ContactForm } from "./Form/Form";
 import { Filter } from "./Filter/Filter";
 import { PrimaryTitle, SecondaryTitle } from "./Titles/Titles";
+import { Notification } from "./ContactList/ContactList.styled";
 
 
 
@@ -116,6 +117,7 @@ export class App extends Component {
                     deleteContact = {this.deleteContact}
                     contacts = {contacts}
                   />
+                  { contacts.length === 0 && <Notification>You have no contacts</Notification>}
               </Container>
 
             </Container>

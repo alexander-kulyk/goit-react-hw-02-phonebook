@@ -7,9 +7,7 @@ export const Contact = ({visibleContact, deleteContact, contacts}) =>{
     return(
         <ContactList>
           
-            { contacts.length === 0
-                ? <Notification>You have no contacts</Notification>
-                : visibleContact.length === 0
+            {   visibleContact.length === 0
                     ? <Notification>contact not found</Notification>
                     : visibleContact.map(({id, name, number}) =>(
                         <ItemsContact 
