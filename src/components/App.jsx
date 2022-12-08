@@ -78,50 +78,36 @@ export class App extends Component {
 
     return (
 
-          <ThemeProvider theme={theme}>
-            <Container>
+        <ThemeProvider theme={theme}>
+          <Container
+            display="flex"
+            flexDirection='column'
+            justifyContent='center'
+            alignItems='center'
+          >
 
-              <Container
-                display="flex"
-                flexDirection='column'
-                justifyContent='center'
-                alignItems='center'
-                bg='#ededf0'
-                p={4}
-                boxShadow="0px 2px 10px -3px rgba(0,0,0,0.3)"
-                
-              >
-                <PrimaryTitle>Phonebook</PrimaryTitle>
-                  <ContactForm 
-                    state = {this.state} 
-                    handelChangeInput={this.handelChangeInput}
-                    handleSubmit = {this.handleSubmit}
-                    addNewCotact = {this.addNewCotact}
-                  />
-              </Container>
+            <PrimaryTitle>Phonebook</PrimaryTitle>
+            <ContactForm 
+              state = {this.state} 
+              handelChangeInput={this.handelChangeInput}
+              handleSubmit = {this.handleSubmit}
+              addNewCotact = {this.addNewCotact}
+            />
 
-              <Container
-                display="flex"
-                flexDirection='column'
-                justifyContent='center'
-                alignItems='center'
-              >
-                <SecondaryTitle>Contact</SecondaryTitle>
-                  <Filter 
-                    title="Find contacs by name"
-                    state = {this.state}
-                    handleFindContact = {this.handleFindContact}
-                    />
-                  <Contact 
-                    visibleContact = {visibleContact}
-                    deleteContact = {this.deleteContact}
-                    contacts = {contacts}
-                  />
-                  { contacts.length === 0 && <Notification>You have no contacts</Notification>}
-              </Container>
-
-            </Container>
-          </ThemeProvider>
+            <SecondaryTitle>Contact</SecondaryTitle>
+              <Filter 
+                title="Find contacs by name"
+                state = {this.state}
+                handleFindContact = {this.handleFindContact}
+                />
+              <Contact 
+                visibleContact = {visibleContact}
+                deleteContact = {this.deleteContact}
+                contacts = {contacts}
+              />
+              { contacts.length === 0 && <Notification>You have no contacts</Notification>}
+           </Container>
+        </ThemeProvider>
         );
   }
 
